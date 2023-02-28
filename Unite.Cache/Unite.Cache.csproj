@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
+	<Version>1.0.0</Version>
+	<SynchReleaseVersion>false</SynchReleaseVersion>
+	<RepositoryUrl>https://github.com/dkfz-unite/unite-cache</RepositoryUrl>
+	<Authors>Valiantsin Ulasau (DKFZ)</Authors>
+	<Description>Unite cache data entites and services package.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Configuration\" />
+    <None Remove="Configuration\Options\" />
+    <None Remove="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Configuration\Options\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
+  </ItemGroup>
+</Project>
