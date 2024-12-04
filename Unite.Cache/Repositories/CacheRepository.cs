@@ -45,6 +45,13 @@ public abstract class CacheRepository<T> where T : class
         return entry;
     }
 
+     public virtual IEnumerable<BsonEntity<T>> Where(Expression<Func<BsonEntity<T>, bool>> predicate)
+    {
+        var entry = _collection.Find(predicate).ToList();
+
+        return entry;
+    }
+
     public virtual bool Any()
     {
         var any = _collection.Find(entry => true).Any();
