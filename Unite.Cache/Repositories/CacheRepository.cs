@@ -45,9 +45,16 @@ public abstract class CacheRepository<T> where T : class
         return entry;
     }
 
-     public virtual IEnumerable<BsonEntity<T>> Where(Expression<Func<BsonEntity<T>, bool>> predicate)
+    public virtual IEnumerable<BsonEntity<T>> Where(Expression<Func<BsonEntity<T>, bool>> predicate)
     {
         var entry = _collection.Find(predicate).ToList();
+
+        return entry;
+    }
+
+    public virtual async Task<IEnumerable<BsonEntity<T>>> WhereAsync(Expression<Func<BsonEntity<T>, bool>> predicate)
+    {
+        var entry = await _collection.Find(predicate).ToListAsync();
 
         return entry;
     }
@@ -75,8 +82,22 @@ public abstract class CacheRepository<T> where T : class
         return entity.Id;
     }
 
+    public virtual async Task<string> AddAsync(T document)
+    {
+        var entity = new BsonEntity<T>(document);
+
+        await _collection.InsertOneAsync(entity);
+
+        return entity.Id;
+    }
+
     public void Delete(string id)
     {
         _collection.FindOneAndDelete(entity => entity.Id == id);
+    }
+
+    public async Task DeleteAsync(string id)
+    {
+        await _collection.FindOneAndDeleteAsync(entity => entity.Id == id);
     }
 }
