@@ -12,7 +12,7 @@ public abstract class CacheRepository<T> where T : class
 
     public abstract string DatabaseName { get; }
     public abstract string CollectionName { get; }
-
+    
 
     public CacheRepository(IMongoOptions options)
     {
@@ -75,9 +75,20 @@ public abstract class CacheRepository<T> where T : class
 
     public virtual string Add(T document)
     {
-        var entity = new BsonEntity<T>(document);
+        return Add(document, _collection);
+    }
+    
+    public virtual string Add<TDocument>(TDocument document)
+    {
+        var collection = _database.GetCollection<BsonEntity<TDocument>>(CollectionName);
+        return Add(document, collection);
+    }
 
-        _collection.InsertOne(entity);
+    private string Add<TDocument>(TDocument document, IMongoCollection<BsonEntity<TDocument>> collection)
+    {
+        var entity = new BsonEntity<TDocument>(document);
+
+        collection.InsertOne(entity);
 
         return entity.Id;
     }
