@@ -4,7 +4,7 @@ using Unite.Cache.Configuration.Options;
 
 namespace Unite.Cache.Repositories;
 
-public abstract class CacheRepository2
+public abstract class CacheRepositoryGenericPerMethod
 {
     private readonly IMongoClient _client;
     private readonly IMongoDatabase _database;
@@ -17,7 +17,7 @@ public abstract class CacheRepository2
         return _database.GetCollection<BsonEntity<T>>(CollectionName);
     }
 
-    protected CacheRepository2(IMongoOptions options)
+    protected CacheRepositoryGenericPerMethod(IMongoOptions options)
     {
         var connectionString = $"mongodb://{options.User}:{options.Password}@{options.Host}:{options.Port}";
 
