@@ -32,6 +32,14 @@ public abstract class CacheRepositoryGenericPerMethod
 
         return entity;
     }
+    
+    public virtual TDocument FindDocument<TDocument>(string id) where TDocument : class
+    {
+        var collection = GetCollection<TDocument>();
+        var entity = collection.Find(entity => entity.Id == id).FirstOrDefault();
+
+        return entity?.Document;
+    }
 
     public virtual BsonEntity<TDocument> FirstOrDefault<TDocument>()
     {

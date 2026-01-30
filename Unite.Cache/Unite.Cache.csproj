@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ReleaseVersion>1.2.1</ReleaseVersion>
-	<Version>1.2.1</Version>
+    <ReleaseVersion>1.2.2</ReleaseVersion>
+	<Version>1.2.2</Version>
 	<SynchReleaseVersion>false</SynchReleaseVersion>
 	<RepositoryUrl>https://github.com/dkfz-unite/unite-cache</RepositoryUrl>
 	<Authors>Valiantsin Ulasau (DKFZ)</Authors>
