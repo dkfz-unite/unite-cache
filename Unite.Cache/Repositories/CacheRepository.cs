@@ -30,6 +30,13 @@ public abstract class CacheRepository<T> where T : class
 
         return entity;
     }
+    
+    public virtual T FindDocument(string id)
+    {
+        var entity = _collection.Find(entity => entity.Id == id).FirstOrDefault();
+
+        return entity?.Document;
+    }
 
     public virtual BsonEntity<T> FirstOrDefault()
     {
