@@ -119,6 +119,16 @@ public abstract class CacheRepository<T> where T : class
         await _collection.FindOneAndDeleteAsync(entity => entity.Id == id);
     }
 
+    public void DeleteMany(IEnumerable<string> ids)
+    {
+        _collection.DeleteMany(entity => ids.Contains(entity.Id));
+    }
+
+    public async Task DeleteManyAsync(IEnumerable<string> ids)
+    {
+        await _collection.DeleteManyAsync(entity => ids.Contains(entity.Id));
+    }
+
     public void Update(string id, T document)
     {
         var update = Builders<BsonEntity<T>>.Update.Set(item => item.Document, document);
